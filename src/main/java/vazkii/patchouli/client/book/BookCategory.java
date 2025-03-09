@@ -6,6 +6,7 @@ import java.util.stream.Stream;
 
 import com.google.gson.annotations.SerializedName;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.common.base.PatchouliConfig;
 import vazkii.patchouli.common.book.Book;
@@ -21,8 +22,8 @@ public class BookCategory extends AbstractReadStateHolder implements Comparable<
 	transient Book book, trueProvider;
 	transient boolean checkedParent = false;
 	transient BookCategory parentCategory;
-	transient List<BookCategory> children = new ArrayList<>();
-	transient List<BookEntry> entries = new ArrayList<>();
+	transient List<BookCategory> children = new ObjectArrayList<>();
+	transient List<BookEntry> entries = new ObjectArrayList<>();
 	transient boolean locked;
 	transient BookIcon icon = null;
 	transient ResourceLocation resource;

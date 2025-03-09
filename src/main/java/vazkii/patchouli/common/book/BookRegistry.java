@@ -6,10 +6,10 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.gson.Gson;
@@ -29,7 +29,7 @@ public class BookRegistry {
 	public static final BookRegistry INSTANCE = new BookRegistry();
 	public static final String BOOKS_LOCATION = Patchouli.MOD_ID + "_books";
 
-	public final Map<ResourceLocation, Book> books = new HashMap<>();
+	public final Map<ResourceLocation, Book> books = new Object2ObjectOpenHashMap <>();
 	public Gson gson;
 
 	private BookRegistry() { 
@@ -38,7 +38,7 @@ public class BookRegistry {
 
 	public void init() {
 		List<ModContainer> mods = Loader.instance().getActiveModList();
-		Map<Pair<ModContainer, ResourceLocation>, String> foundBooks = new HashMap<>();
+		Map<Pair<ModContainer, ResourceLocation>, String> foundBooks = new Object2ObjectOpenHashMap<>();
 
 		mods.forEach((mod) -> {
 			String id = mod.getModId();

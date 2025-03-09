@@ -1,13 +1,15 @@
 package vazkii.patchouli.client.book.template;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
+
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import com.google.gson.annotations.SerializedName;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
 
@@ -16,10 +18,10 @@ public class TemplateInclusion {
 	public String template;
 	public String as;
 	@SerializedName("using")
-	public Map<String, String> map = new HashMap<>();
+	public Map<String, String> map = new Object2ObjectOpenHashMap<>();
 	public int x, y;
 
-	transient List<String> visitedTemplates = new ArrayList<>();
+	transient List<String> visitedTemplates = new ObjectArrayList<>();
 	
 	public void upperMerge(TemplateInclusion upper) {
 		if(upper == null)
@@ -28,7 +30,7 @@ public class TemplateInclusion {
 		if(upper.visitedTemplates.contains(template))
 			throw new IllegalArgumentException("Breaking when include template " + template + ", circular dependencies aren't allowed (stack = " + upper.visitedTemplates + ")");
 		
-		visitedTemplates = new ArrayList<>(upper.visitedTemplates);
+		visitedTemplates = new ObjectArrayList<>(upper.visitedTemplates);
 		visitedTemplates.add(template);
 		as = upper.realName(as);
 		x += upper.x;

@@ -1,7 +1,6 @@
 package vazkii.patchouli.client.book;
 
 import java.lang.reflect.Type;
-import java.util.HashMap;
 import java.util.Map;
 
 import com.google.gson.Gson;
@@ -13,6 +12,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.client.resources.IResourceManager;
@@ -43,7 +43,7 @@ import javax.annotation.Nonnull;
 
 public class ClientBookRegistry implements IResourceManagerReloadListener {
 
-	public final Map<String, Class<? extends BookPage>> pageTypes = new HashMap<>();
+	public final Map<String, Class<? extends BookPage>> pageTypes = new Object2ObjectOpenHashMap<>();
 
 	private boolean firstLoad = true;
 

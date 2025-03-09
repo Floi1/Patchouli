@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.google.common.collect.Lists;
 
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.Ingredient;
@@ -82,7 +83,7 @@ public class ItemStackUtil {
 	
 	public static Ingredient loadIngredientFromString(String ingredientString) {
 		String[] stacksSerialized = splitStacksFromSerializedIngredient(ingredientString);
-		List<ItemStack> stacks = Lists.newArrayList();
+		List<ItemStack> stacks = new ObjectArrayList<>();
 		for (int i = 0; i < stacksSerialized.length; i++) {
 			if (stacksSerialized[i].startsWith("ore:")) {
 				OreIngredient ore = new OreIngredient(stacksSerialized[i].substring(4));

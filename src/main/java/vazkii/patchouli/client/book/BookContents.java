@@ -1,5 +1,7 @@
 package vazkii.patchouli.client.book;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.item.ItemStack;
@@ -30,14 +32,14 @@ public class BookContents extends AbstractReadStateHolder {
 	private static final String[] ORDINAL_SUFFIXES = new String[]{ "th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th" };
 	protected static final String DEFAULT_LANG = "en_us";
 	
-	public static final HashMap<ResourceLocation, Supplier<BookTemplate>> addonTemplates = new HashMap();
+	public static final Object2ObjectOpenHashMap<ResourceLocation, Supplier<BookTemplate>> addonTemplates = new Object2ObjectOpenHashMap();
 
 	public final Book book;
 
-	public Map<ResourceLocation, BookCategory> categories = new HashMap<>();
-	public Map<ResourceLocation, BookEntry> entries = new HashMap<>();
-	public Map<ResourceLocation, Supplier<BookTemplate>> templates = new HashMap<>();
-	public Map<StackWrapper, Pair<BookEntry, Integer>> recipeMappings = new HashMap<>();
+	public Object2ObjectOpenHashMap<ResourceLocation, BookCategory> categories = new Object2ObjectOpenHashMap<>();
+	public Object2ObjectOpenHashMap<ResourceLocation, BookEntry> entries = new Object2ObjectOpenHashMap<>();
+	public Object2ObjectOpenHashMap<ResourceLocation, Supplier<BookTemplate>> templates = new Object2ObjectOpenHashMap<>();
+	public Object2ObjectOpenHashMap<StackWrapper, Pair<BookEntry, Integer>> recipeMappings = new Object2ObjectOpenHashMap<>();
 	private boolean errored = false;
 	private Exception exception = null;
 
@@ -114,9 +116,9 @@ public class BookContents extends AbstractReadStateHolder {
 			else indexIcon = new BookIcon(book.indexIconRaw);
 		}
 
-		List<ResourceLocation> foundCategories = new ArrayList<>();
-		List<ResourceLocation> foundEntries = new ArrayList<>();
-		List<ResourceLocation> foundTemplates = new ArrayList<>();
+		List<ResourceLocation> foundCategories = new ObjectArrayList<>();
+		List<ResourceLocation> foundEntries = new ObjectArrayList<>();
+		List<ResourceLocation> foundTemplates = new ObjectArrayList<>();
 		List<ModContainer> mods = Loader.instance().getActiveModList();
 
 		try { 

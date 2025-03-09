@@ -1,11 +1,13 @@
 package vazkii.patchouli.client.book;
 
-import java.util.ArrayList;
+
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.google.common.collect.ImmutableList;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
+import it.unimi.dsi.fastutil.objects.ObjectLinkedOpenHashSet;
 import org.apache.commons.lang3.tuple.Pair;
 
 import com.google.gson.annotations.SerializedName;
@@ -43,7 +45,7 @@ public class BookEntry extends AbstractReadStateHolder implements Comparable<Boo
 	transient Book book, trueProvider;
 	transient BookCategory lcategory = null;
 	transient BookIcon icon = null;
-	transient List<BookPage> realPages = new ArrayList<>();
+	transient List<BookPage> realPages = new ObjectArrayList<>();
 	transient List<StackWrapper> relevantStacks = new LinkedList<>();
 	transient boolean locked;
 

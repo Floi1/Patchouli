@@ -2,7 +2,6 @@ package vazkii.patchouli.client.book.template;
 
 import java.lang.reflect.Field;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -10,6 +9,7 @@ import java.util.function.Function;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
 import org.apache.commons.lang3.text.WordUtils;
 
 import net.minecraft.item.ItemStack;
@@ -24,14 +24,14 @@ public class VariableAssigner {
 	private static final Pattern INLINE_VAR_PATTERN = Pattern.compile("([^#]*)(#[^#]+)#(.*)");
 	private static final Pattern FUNCTION_PATTERN = Pattern.compile("(.+)->(.+)");
 
-	private static final Map<Class<?>, Assigner> ASSIGNERS = new HashMap<Class<?>, Assigner>() {{
+	private static final Map<Class<?>, Assigner> ASSIGNERS = new Object2ObjectOpenHashMap<Class<?>, Assigner>() {{
 		put(String.class, VariableAssigner::assignStringField);
 		put(String[].class, VariableAssigner::assignStringArrayField);
 		put(List.class, VariableAssigner::assignList);
 		put(Map.class, VariableAssigner::assignMap);
 	}};
 	
-	private static final Map<String, Function<String, String>> FUNCTIONS = new HashMap<String, Function<String, String>>() {{
+	private static final Map<String, Function<String, String>> FUNCTIONS = new Object2ObjectOpenHashMap<String, Function<String, String>>() {{
 		put("iname", VariableAssigner::iname);
 		put("icount", VariableAssigner::icount);
 		put("ename", VariableAssigner::ename);
@@ -238,7 +238,7 @@ public class VariableAssigner {
 		final Map<String, String> cachedVars;
 
 		Context(Object object, IVariableProvider<String> variables, IComponentProcessor processor, TemplateInclusion encapsulation) {
-			this(object, variables, processor, encapsulation, new HashMap());
+			this(object, variables, processor, encapsulation, new Object2ObjectOpenHashMap<>());
 		}
 
 		Context(Object object, IVariableProvider<String> variables, IComponentProcessor processor, TemplateInclusion encapsulation, Map<String, String> cachedVars) {

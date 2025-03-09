@@ -1,13 +1,14 @@
 package vazkii.patchouli.client.book.template;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Supplier;
 
 import com.google.gson.annotations.SerializedName;
 
+import it.unimi.dsi.fastutil.objects.Object2ObjectOpenHashMap;
+import it.unimi.dsi.fastutil.objects.ObjectArrayList;
 import net.minecraft.util.ResourceLocation;
 import vazkii.patchouli.api.IComponentProcessor;
 import vazkii.patchouli.api.IVariableProvider;
@@ -28,7 +29,7 @@ import vazkii.patchouli.common.util.ValidationUtils;
 
 public class BookTemplate {
 	
-	public static final HashMap<String, Class<? extends TemplateComponent>> componentTypes = new HashMap<>();
+	public static final Object2ObjectOpenHashMap<String, Class<? extends TemplateComponent>> componentTypes = new Object2ObjectOpenHashMap<>();
 	
 	static {
 		registerComponent("text", ComponentText.class);
@@ -43,8 +44,8 @@ public class BookTemplate {
 	}
 
 	@SerializedName("include")
-	List<TemplateInclusion> inclusions = new ArrayList<>();
-	List<TemplateComponent> components = new ArrayList<>();
+	List<TemplateInclusion> inclusions = new ObjectArrayList<>();
+	List<TemplateComponent> components = new ObjectArrayList<>();
 	
 	@SerializedName("processor")
 	String processorClass;
